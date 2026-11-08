@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 33% 99%;
+    --foreground: 232 33% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 232 33% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 232 33% 12%;
+    --primary: 243 67% 51%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 243 60% 96%;
+    --secondary-foreground: 243 40% 26%;
+    --muted: 240 30% 96%;
+    --muted-foreground: 234 14% 42%;
+    --accent: 186 60% 95%;
+    --accent-foreground: 186 45% 24%;
+    --destructive: 355 78% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 236 24% 88%;
+    --input: 236 24% 88%;
+    --ring: 243 67% 51%;
+    --chart-1: 243 70% 58%;
+    --chart-2: 172 66% 42%;
+    --chart-3: 12 86% 62%;
+    --chart-4: 43 95% 56%;
+    --chart-5: 280 68% 62%;
+    --radius: 0.5rem;
+    --font-heading: ui-sans-serif, system-ui, sans-serif;
+    --font-body: ui-sans-serif, system-ui, sans-serif;
+    --font-display: ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Indigo to teal: confident enough to feel professional, bright enough to be fun. */
+    --app-gradient: linear-gradient(135deg, #eaeefe 0%, #e2e8ff 42%, #d9f2ee 100%);
+  }
+
+  .dark {
+    --background: 235 32% 8%;
+    --foreground: 225 25% 96%;
+    --card: 235 25% 12%;
+    --card-foreground: 225 25% 96%;
+    --popover: 235 25% 12%;
+    --popover-foreground: 225 25% 96%;
+    --primary: 243 82% 72%;
+    --primary-foreground: 235 40% 10%;
+    --secondary: 235 20% 20%;
+    --secondary-foreground: 225 25% 96%;
+    --muted: 235 20% 20%;
+    --muted-foreground: 232 14% 72%;
+    --accent: 190 30% 22%;
+    --accent-foreground: 186 60% 88%;
+    --destructive: 355 72% 56%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 235 18% 26%;
+    --input: 235 18% 26%;
+    --ring: 243 82% 72%;
+    --chart-1: 243 80% 70%;
+    --chart-2: 172 60% 52%;
+    --chart-3: 12 85% 66%;
+    --chart-4: 43 95% 62%;
+    --chart-5: 280 75% 70%;
+    --sidebar-background: 252 15% 10%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 224.3 76.3% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 252 12% 20%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 252 10% 24%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Night version of the same indigo-to-teal sweep. */
+    --app-gradient: linear-gradient(135deg, #12142b 0%, #1b2150 45%, #0d2c31 100%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: hsl(var(--background));
+  }
+
+  body {
+    @apply text-foreground font-body;
+    /* The gradient sits on its own fixed layer: a pinned background image repaints
+       on every scroll frame, which is what makes long pages feel sluggish. */
+    background: transparent;
+    min-height: 100vh;
+    /* Mobile: the app handles its own scrolling — no rubber-band page bounce. */
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* The gradient backdrop, painted once on a fixed layer instead of on the body. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--app-gradient);
+    pointer-events: none;
+  }
+
+  /* Scroll containers (lists, sheets) keep their scroll inside themselves. */
+  .scroll-container {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Text stays selectable where it matters. */
+  input,
+  textarea,
+  select,
+  [contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Chrome that behaves like an app: taps on controls never start a text selection. */
+  button,
+  [role="button"],
+  [role="tab"],
+  nav a,
+  header a,
+  label,
+  .lucide,
+  .select-none-tap {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+@layer utilities {
+  /* Notches, gesture bars and Android status bars. */
+  /* Screens that paint the app backdrop themselves (the auth pages). */
+  .app-gradient {
+    background: var(--app-gradient);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .no-overscroll {
+    overscroll-behavior: none;
+  }
+
+  /* Each new page fades in; the header and tab bar never move. */
+  .page-enter {
+    animation: page-in 140ms ease-out both;
+  }
+
+  @keyframes page-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 4px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* The blinking mark at the end of an answer that is still being written out. */
+  .caret-blink {
+    animation: caret-blink 900ms steps(2, start) infinite;
+  }
+
+  @keyframes caret-blink {
+    to {
+      visibility: hidden;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-enter {
+      animation: none;
+    }
+
+    .caret-blink {
+      animation: none;
+    }
+  }
+}

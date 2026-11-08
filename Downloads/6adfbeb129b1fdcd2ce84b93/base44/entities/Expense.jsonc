@@ -1,0 +1,91 @@
+{
+  "name": "Expense",
+  "type": "object",
+  "properties": {
+    "trip_id": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "amount_cents": {
+      "type": "number"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Food",
+        "Transit",
+        "Stay",
+        "Activity",
+        "Shopping",
+        "Other"
+      ],
+      "enumColors": [
+        "green",
+        "blue",
+        "purple",
+        "yellow",
+        "pink",
+        "gray"
+      ],
+      "default": "Other"
+    },
+    "spent_on": {
+      "type": "string",
+      "format": "date"
+    },
+    "receipt_file_uri": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "trip_id",
+    "label",
+    "amount_cents"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

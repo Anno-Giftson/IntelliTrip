@@ -1,0 +1,531 @@
+{
+  "name": "Trip",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "finalized"
+      ],
+      "default": "in_progress"
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "frame",
+        "full"
+      ],
+      "default": "frame"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "random",
+        "typed"
+      ]
+    },
+    "destination_type": {
+      "type": "string"
+    },
+    "destination": {
+      "type": "string"
+    },
+    "details": {
+      "type": "string"
+    },
+    "origin_city": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "time_zone": {
+      "type": "string"
+    },
+    "keep_as_reference": {
+      "type": "boolean",
+      "default": false
+    },
+    "travelers": {
+      "type": "number",
+      "default": 1
+    },
+    "budget": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "custom_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "title": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string"
+          },
+          "end_time": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "Transit",
+              "Activity",
+              "Rest",
+              "Dining"
+            ],
+            "enumColors": [
+              "blue",
+              "purple",
+              "gray",
+              "green"
+            ]
+          },
+          "cost": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "companions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "full_name": {
+            "type": "string"
+          },
+          "likes": {
+            "type": "string"
+          },
+          "dislikes": {
+            "type": "string"
+          },
+          "dietary": {
+            "type": "string"
+          },
+          "home_city": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "shared_expenses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "amount_cents": {
+            "type": "number"
+          },
+          "split_count": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "map_points": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          }
+        },
+        "lodging": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "lat": {
+              "type": "number"
+            },
+            "lng": {
+              "type": "number"
+            }
+          }
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "lng": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "food": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "cuisine": {
+                "type": "string"
+              },
+              "must_try": {
+                "type": "string"
+              },
+              "cost": {
+                "type": "string"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "lng": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "map_key": {
+      "type": "string"
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "travel": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string"
+            },
+            "route": {
+              "type": "string"
+            },
+            "cost": {
+              "type": "string"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        },
+        "flights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "direction": {
+                "type": "string"
+              },
+              "airline": {
+                "type": "string"
+              },
+              "flight_number": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "departs": {
+                "type": "string"
+              },
+              "departs_at": {
+                "type": "string"
+              },
+              "arrives": {
+                "type": "string"
+              },
+              "arrives_at": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "string"
+              },
+              "stops": {
+                "type": "string"
+              },
+              "cost": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "lodging": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "area": {
+              "type": "string"
+            },
+            "nights": {
+              "type": "string"
+            },
+            "cost": {
+              "type": "string"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        },
+        "food": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "cuisine": {
+                "type": "string"
+              },
+              "must_try": {
+                "type": "string"
+              },
+              "cost": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "itinerary": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "title": {
+                "type": "string"
+              },
+              "details": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "packing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "budget": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "departure_brief": {
+          "type": "string"
+        },
+        "booking_note": {
+          "type": "string"
+        },
+        "booking_links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "prefs": {
+      "type": "object",
+      "properties": {
+        "reminders": {
+          "type": "boolean",
+          "default": true
+        },
+        "mute_notifications": {
+          "type": "boolean",
+          "default": false
+        },
+        "notify_before_days": {
+          "type": "number",
+          "default": 2
+        }
+      }
+    },
+    "ai_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "asked_at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "paid_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payment_label": {
+      "type": "string"
+    },
+    "payment_channel": {
+      "type": "string",
+      "enum": [
+        "inapp",
+        "link",
+        "stripe"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "green"
+      ]
+    },
+    "package_total_cents": {
+      "type": "number"
+    },
+    "payment_checkout_id": {
+      "type": "string"
+    },
+    "calendar_package_prepared_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "tesla_sent_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finalized_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

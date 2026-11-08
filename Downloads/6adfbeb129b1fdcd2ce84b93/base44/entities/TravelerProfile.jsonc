@@ -1,0 +1,100 @@
+{
+  "name": "TravelerProfile",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string"
+    },
+    "likes": {
+      "type": "string"
+    },
+    "dislikes": {
+      "type": "string"
+    },
+    "dietary": {
+      "type": "string"
+    },
+    "pace": {
+      "type": "string"
+    },
+    "stay_style": {
+      "type": "string"
+    },
+    "avoid": {
+      "type": "string"
+    },
+    "home_city": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "companions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "full_name": {
+            "type": "string"
+          },
+          "home_city": {
+            "type": "string"
+          },
+          "likes": {
+            "type": "string"
+          },
+          "dislikes": {
+            "type": "string"
+          },
+          "dietary": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "full_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
